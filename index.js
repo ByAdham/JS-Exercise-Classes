@@ -83,17 +83,20 @@ class Car {
   fill(gallons){
     this.tank = gallons+this.tank;
   }
-  drive(distance){
-    if(distance/this.milesPerGallon >= this.tank){
-      this.tank = 0
-      this.odometer = (this.milesPerGallon * this.tank) + this.odometer
-      return `I ran out of fuel at ${this.odometer} miles`
-    }else{
-      this.tank = this.tank - (distance/this.milesPerGallon)
-      this.odometer = this.odometer + distance
-    }
+  drive (distance){
+
+      if(distance/this.milesPerGallon >= this.tank){
+        this.tank = 0
+        this.odometer = (this.milesPerGallon * this.tank) + this.odometer
+        return `I ran out of fuel at ${this.odometer} miles`
+      }else{
+        this.tank = this.tank - (distance/this.milesPerGallon)
+        this.odometer = this.odometer + distance
+      }
+    }    
   }
-}
+// }  
+
 
 /*
   TASK 3
@@ -124,7 +127,7 @@ const me = new Lambdasian ({
   location: "Austin"
 });
 
-console.log(me.speak(me));
+console.log(me.speak());
 
 /*
   TASK 4
@@ -140,9 +143,33 @@ console.log(me.speak(me));
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(obj){
+    super(obj);  
 
+    this.specialty = obj.specialty;
+    this.favLanguage = obj.favLanguage;
+    this.catchPhrase = obj.catchPhrase;  
+    
+  }
+  demo (subject) {
+    return `Today we are learning about ${subject}`
+  }
+  grade (student, subject) {
+    return `${student.name} receives a perfect score on ${subject}`
+  }
 }
+
+const Brit = new Instructor({
+  name: "Brit",
+  age: 25,
+  location: "Canada",
+  speciality: "React",
+  favLanguage: "JavaScript",
+  catchPhrase: "Something Here"
+})
+
+console.log(Brit.speak());
 
 /*
   TASK 5
@@ -159,9 +186,18 @@ class Instructor {
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
 
-}
+class Student extends Lambdasian {
+    constructor (obj) {
+      super(obj);
+
+      this.previousBackground = obj.previousBackground;
+      this.className = obj.className;
+      this.favSubjects = obj.favSubjects;
+    }
+    listSubjects = (`Loving ${this.favSubjects}`)
+  }
+
 
 /*
   TASK 6
